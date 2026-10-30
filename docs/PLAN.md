@@ -149,15 +149,15 @@ API checks run against the dev backend at `http://127.0.0.1:8000` from `npm run 
 
 **Why now:** these are the remaining screens in "What the team needs to see", built on the frame from Phase 4.
 
-- [ ] Vitest: the claim page renders the story, items, documents, policy, history and decision from stubbed responses
-- [ ] Vitest: the sign-off control appears only while a claim is waiting for sign-off, and it posts the chosen handler to `/api/claims/<id>/sign-off`
-- [ ] Vitest: steps render in order, and each result is folded until opened
-- [ ] Vitest: the instructions page renders the text and has no inputs or buttons
-- [ ] E2E: clicking CLM-1001 in the queue opens its page, which shows the story, the 3 items, the 4 documents, the Premium policy and the earlier claim CLM-0412
-- [ ] E2E, playing the agent through the API: start CLM-1003 and add three steps. The page shows In progress and the steps in order. Record an approve of $1,250.00, and the page shows Waiting for sign-off with the reason and section. Choose Dana Whitfield and sign off, and the page shows Decided, paid $1,250.00, signed off by Dana Whitfield
-- [ ] E2E: the instructions page shows the instructions and the policy wording, with no inputs or buttons
-- [ ] Browser: the claim page and the instructions page in light and dark mode follow the brand. Screenshots taken
-- [ ] `npm run check:ts` passes, with coverage at 80% or more
+- [x] Vitest: the claim page renders the story, items, documents, policy, history and decision from stubbed responses
+- [x] Vitest: the sign-off control appears only while a claim is waiting for sign-off, and it posts the chosen handler to `/api/claims/<id>/sign-off`
+- [x] Vitest: steps render in order, and each result is folded until opened
+- [x] Vitest: the instructions page renders the text and has no inputs or buttons
+- [x] E2E: clicking CLM-1001 in the queue opens its page, which shows the story, the 3 items, the 4 documents, the Premium policy and the earlier claim CLM-0412
+- [x] E2E, playing the agent through the API: start CLM-1003 and add three steps. The page shows In progress and the steps in order. Record an approve of $1,250.00, and the page shows Waiting for sign-off with the reason and section. Choose Dana Whitfield and sign off, and the page shows Decided, paid $1,250.00, signed off by Dana Whitfield
+- [x] E2E: the instructions page shows the instructions and the policy wording, with no inputs or buttons
+- [x] Browser: the claim page and the instructions page in light and dark mode follow the brand. Screenshots taken
+- [x] `npm run check:ts` passes, with coverage at 80% or more
 
 ## Phase 6: The pilot end to end
 

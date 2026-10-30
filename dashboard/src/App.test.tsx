@@ -1,7 +1,7 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import { afterEach, expect, it, vi } from "vitest";
 import { App } from "./App";
-import { QUEUE, stubApi } from "./testing";
+import { QUEUE, claimRoutes, stubApi } from "./testing";
 
 afterEach(() => {
   cleanup();
@@ -21,4 +21,27 @@ it("shows the queue by default", async () => {
   expect(
     screen.getByRole("link", { name: "Instructions" }).getAttribute("href"),
   ).toBe("#/instructions");
+});
+
+it("opens a claim from its route", async () => {
+  stubApi(claimRoutes());
+  window.location.hash = "#/claims/CLM-1003";
+  render(<App />);
+  expect(
+    await screen.findByText(
+      "I slipped on wet steps in Lisbon and broke my wrist.",
+    ),
+  ).toBeDefined();
+});
+
+it("opens the instructions from their route", async () => {
+  stubApi({ "/api/instructions": { instructions: "Decide claims." } });
+  window.location.hash = "#/instructions";
+  render(<App />);
+  expect(await screen.findByText("Decide claims.")).toBeDefined();
+  expect(
+    screen
+      .getByRole("link", { name: "Instructions" })
+      .getAttribute("aria-current"),
+  ).toBe("page");
 });
