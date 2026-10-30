@@ -134,14 +134,14 @@ API checks run against the dev backend at `http://127.0.0.1:8000` from `npm run 
 
 **Why now:** the API is complete, so the dashboard is built against real responses, and the frame and the queue come before the pages that hang off them.
 
-- [ ] Vitest: the queue renders claims from a stubbed fetch with the right status labels, the counts in each tile, money as `$1,150.00`, and each row linking to `#/claims/<id>`
-- [ ] Vitest: the queue shows a message when the backend doesn't answer
-- [ ] E2E: the queue shows 25 claims and the Waiting tile shows 25
-- [ ] `npm run e2e` passes twice in a row, and the dev database at `backend/undercover.db` is unchanged by it
-- [ ] Browser, at 1440 by 900: the queue uses Instrument Sans with ids and money in JetBrains Mono, the page background is `#F0F4F5`, the panels are white and rounded with no outline, and there are no one-edge borders or lines across the top. Screenshot taken
-- [ ] Browser, with dark mode emulated: the page background is `#04232E`, the panels are black, and the text is Sea Mist. Screenshot taken
-- [ ] Browser, with `npm run dev` running: after `uv run -m agent CLM-1001`, the tiles and the CLM-1001 row change within a few seconds, without a reload
-- [ ] `npm run check:ts` passes, with coverage at 80% or more
+- [x] Vitest: the queue renders claims from a stubbed fetch with the right status labels, the counts in each tile, money as `$1,150.00`, and each row linking to `#/claims/<id>`
+- [x] Vitest: the queue shows a message when the backend doesn't answer
+- [x] E2E: the queue shows 25 claims and the Waiting tile shows 25
+- [x] `npm run e2e` passes twice in a row, and the dev database at `backend/undercover.db` is unchanged by it
+- [x] Browser, at 1440 by 900: the queue uses Instrument Sans with ids and money in JetBrains Mono, the page background is `#F0F4F5`, the panels are white and rounded with no outline, and there are no one-edge borders or lines across the top. Screenshot taken
+- [x] Browser, with dark mode emulated: the page background is `#04232E`, the panels are black, and the text is Sea Mist. Screenshot taken
+- [x] Browser, with `npm run dev` running: after `uv run -m agent CLM-1001`, the tiles and the CLM-1001 row change within a few seconds, without a reload
+- [x] `npm run check:ts` passes, with coverage at 80% or more
 
 ## Phase 5: The claim page and the instructions page
 

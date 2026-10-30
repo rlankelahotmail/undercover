@@ -1,19 +1,34 @@
-import { useEffect, useState } from "react";
+import { Queue } from "./Queue";
+import { useHash } from "./route";
 
 export function App() {
-  const [status, setStatus] = useState("checking");
-
-  useEffect(() => {
-    void fetch("/api/health")
-      .then((response) => (response.ok ? "up" : "down"))
-      .catch(() => "down")
-      .then(setStatus);
-  }, []);
+  const hash = useHash();
 
   return (
-    <main>
-      <h1>UnderCover</h1>
-      <p>Backend: {status}</p>
-    </main>
+    <>
+      <header className="header">
+        <a className="brand" href="#/">
+          UnderCover
+        </a>
+        <span className="tagline">Claims desk</span>
+        <nav aria-label="Main">
+          <a
+            href="#/"
+            aria-current={hash === "#/instructions" ? undefined : "page"}
+          >
+            Queue
+          </a>
+          <a
+            href="#/instructions"
+            aria-current={hash === "#/instructions" ? "page" : undefined}
+          >
+            Instructions
+          </a>
+        </nav>
+      </header>
+      <main>
+        <Queue />
+      </main>
+    </>
   );
 }
