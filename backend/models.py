@@ -1,11 +1,48 @@
 """The shapes of the UnderCover API."""
 
-from typing import Literal
+from typing import Literal, Self
 
-from pydantic import BaseModel
+from pydantic import BaseModel, model_validator
 
 Status = Literal["waiting", "in_progress", "waiting_for_sign_off", "decided"]
 Outcome = Literal["approve", "decline", "refer"]
+StepKind = Literal["call", "result", "message"]
+
+
+class Decision(BaseModel):
+    outcome: Outcome
+    payout: float
+    reason: str
+    policy_section: str
+
+    @model_validator(mode="after")
+    def payout_fits_outcome(self) -> Self:
+        """Check that an approve pays something and a decline or refer pays nothing."""
+        if self.outcome == "approve" and self.payout <= 0:
+            raise ValueError("An approve needs a payout above $0")
+        if self.outcome != "approve" and self.payout != 0:
+            raise ValueError(f"A {self.outcome} needs a payout of $0")
+        return self
+
+
+class Payment(BaseModel):
+    amount: float
+
+
+class SignOff(BaseModel):
+    handler_id: str
+
+
+class NewStep(BaseModel):
+    thread_id: str
+    kind: StepKind
+    name: str
+    content: str
+
+
+class Step(NewStep):
+    id: int
+    created_at: str
 
 
 class Item(BaseModel):

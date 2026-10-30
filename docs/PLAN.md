@@ -98,17 +98,17 @@ API checks run against the dev backend at `http://127.0.0.1:8000` from `npm run 
 
 **Why now:** the payment block is the spec's hardest rule, so it's built and tested in the backend before any agent exists to try to get around it.
 
-- [ ] `POST /api/claims/CLM-1001/start` moves the claim to `in_progress`. Starting a decided claim returns a 409
-- [ ] `POST /api/claims/CLM-1001/steps` adds a step, and `GET /api/claims/CLM-1001/steps` returns the steps in order with their thread id, kind, name and content. Starting the claim again clears them
-- [ ] Approving CLM-1001 for $420.00 moves it to `decided`, and the claim shows the outcome, payout, reason and policy section
-- [ ] A second decision, or a decision on a claim that isn't in progress, returns a 409. A decline or refer with a payout above $0, or an approve with $0, returns a 422
-- [ ] Paying CLM-1001 $420.00 records the payment. Paying it again, paying an amount other than the approved payout, or paying a declined or referred claim each returns a 409, and no payment is recorded
-- [ ] Approving CLM-1003 for $1,250.00 moves it to `waiting_for_sign_off`. Paying it returns a 409 whose message says it needs a handler's sign-off, and no payment is recorded
-- [ ] An approve of exactly $1,000.00 moves to `decided` and can be paid without a sign-off
-- [ ] HND-01 signing off CLM-1003 records the sign-off and a payment of $1,250.00, and moves the claim to `decided`. Signing off a claim that isn't waiting for sign-off returns a 409, an unknown handler a 404, and a handler without `can_approve_over_limit` a 403.The test adds its own handler with can_approve_over_limit false to its temporary database, since the seed handlers all have it.
-- [ ] `GET /api/claims` shows each claim's outcome, payout and whether it's paid
-- [ ] The OpenAPI test passes for the new operations
-- [ ] `npm run check:python` passes, with coverage at 80% or more
+- [x] `POST /api/claims/CLM-1001/start` moves the claim to `in_progress`. Starting a decided claim returns a 409
+- [x] `POST /api/claims/CLM-1001/steps` adds a step, and `GET /api/claims/CLM-1001/steps` returns the steps in order with their thread id, kind, name and content. Starting the claim again clears them
+- [x] Approving CLM-1001 for $420.00 moves it to `decided`, and the claim shows the outcome, payout, reason and policy section
+- [x] A second decision, or a decision on a claim that isn't in progress, returns a 409. A decline or refer with a payout above $0, or an approve with $0, returns a 422
+- [x] Paying CLM-1001 $420.00 records the payment. Paying it again, paying an amount other than the approved payout, or paying a declined or referred claim each returns a 409, and no payment is recorded
+- [x] Approving CLM-1003 for $1,250.00 moves it to `waiting_for_sign_off`. Paying it returns a 409 whose message says it needs a handler's sign-off, and no payment is recorded
+- [x] An approve of exactly $1,000.00 moves to `decided` and can be paid without a sign-off
+- [x] HND-01 signing off CLM-1003 records the sign-off and a payment of $1,250.00, and moves the claim to `decided`. Signing off a claim that isn't waiting for sign-off returns a 409, an unknown handler a 404, and a handler without `can_approve_over_limit` a 403.The test adds its own handler with can_approve_over_limit false to its temporary database, since the seed handlers all have it.
+- [x] `GET /api/claims` shows each claim's outcome, payout and whether it's paid
+- [x] The OpenAPI test passes for the new operations
+- [x] `npm run check:python` passes, with coverage at 80% or more
 
 ## Phase 3: The UnderCover Agent
 
