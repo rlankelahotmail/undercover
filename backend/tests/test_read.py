@@ -89,3 +89,11 @@ def test_unknown_ids(client, path):
     response = client.get(path)
     assert response.status_code == 404
     assert response.json()["detail"].endswith("9999")
+
+
+def test_instructions_come_with_the_policy_wording(client):
+    instructions = client.get("/api/instructions").json()["instructions"]
+    assert instructions.startswith("# The UnderCover Agent")
+    assert "# UnderCover Travel Insurance: Policy Wording" in instructions
+    assert "Version 2026.1" in instructions
+    assert "Claims Handling Manual" not in instructions

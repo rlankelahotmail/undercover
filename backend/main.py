@@ -16,6 +16,7 @@ from backend.models import (
     ClaimSummary,
     Decision,
     Handler,
+    Instructions,
     NewStep,
     Payment,
     Policy,
@@ -220,6 +221,16 @@ def list_handlers() -> list[Handler]:
             "SELECT record FROM handlers ORDER BY handler_id"
         ).fetchall()
     return [Handler.model_validate_json(row["record"]) for row in rows]
+
+
+@app.get("/api/instructions", operation_id="get_instructions")
+def get_instructions() -> Instructions:
+    """Get the agent's instructions, with the policy wording they work from."""
+    with db.connect() as connection:
+        row = connection.execute(
+            "SELECT value FROM settings WHERE key = 'instructions'"
+        ).fetchone()
+    return Instructions(instructions=row["value"])
 
 
 @app.post("/api/claims/{claim_id}/start", operation_id="start_claim")

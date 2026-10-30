@@ -149,3 +149,7 @@ class Handler(BaseModel):
     name: str
     role: str
     can_approve_over_limit: bool
+
+
+class Instructions(BaseModel):
+    instructions: str

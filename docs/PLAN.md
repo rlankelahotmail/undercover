@@ -116,15 +116,15 @@ API checks run against the dev backend at `http://127.0.0.1:8000` from `npm run 
 
 **Why now:** the backend's operations and rules are in place, so the agent is a thin layer of tools over them, and the tests can show the backend holding the line against a misbehaving agent.
 
-- [ ] `GET /api/instructions` returns the instructions followed by the policy wording, version 2026.1, with nothing from the claims manual
-- [ ] Stub test: a scripted run on CLM-1001 calls `get_claim`, `get_policy`, `get_claim_history`, `record_decision` (approve, $420.00) and `pay_claim`. The claim ends `decided` and paid, its steps are recorded in order under the run's thread id, and `run` returns the final reply
-- [ ] Stub test: a scripted run that approves CLM-1003 for $1,250.00 and then calls `pay_claim` gets the backend's refusal as the tool's result. The claim ends `waiting_for_sign_off` with no payment
-- [ ] Stub test: the system prompt the agent gets is the text from `GET /api/instructions`
-- [ ] Stub test: `uv run -m agent` works only claims that aren't decided, each with its own thread id, and given a claim id it works just that claim
-- [ ] `agent/` reads nothing from disk. Outside its tests, a search finds no `open(`, `Path` or `data/` in `agent/`
-- [ ] Live, with `npm run dev` running: `uv run -m agent CLM-1001` on the real model prints one line with the outcome, payout and status. `GET /api/claims/CLM-1001` shows a decision with a reason of two or three sentences and a policy section. `GET /api/claims/CLM-1001/steps` shows each tool call and its result
-- [ ] Live: after `uv run -m agent CLM-1003`, whatever the agent decided, there's no payment over $1,000.00 without a sign-off
-- [ ] `npm run check:python` passes, with coverage at 80% or more
+- [x] `GET /api/instructions` returns the instructions followed by the policy wording, version 2026.1, with nothing from the claims manual
+- [x] Stub test: a scripted run on CLM-1001 calls `get_claim`, `get_policy`, `get_claim_history`, `record_decision` (approve, $420.00) and `pay_claim`. The claim ends `decided` and paid, its steps are recorded in order under the run's thread id, and `run` returns the final reply
+- [x] Stub test: a scripted run that approves CLM-1003 for $1,250.00 and then calls `pay_claim` gets the backend's refusal as the tool's result. The claim ends `waiting_for_sign_off` with no payment
+- [x] Stub test: the system prompt the agent gets is the text from `GET /api/instructions`
+- [x] Stub test: `uv run -m agent` works only claims that aren't decided, each with its own thread id, and given a claim id it works just that claim
+- [x] `agent/` reads nothing from disk. Outside its tests, a search finds no `open(`, `Path` or `data/` in `agent/`
+- [x] Live, with `npm run dev` running: `uv run -m agent CLM-1001` on the real model prints one line with the outcome, payout and status. `GET /api/claims/CLM-1001` shows a decision with a reason of two or three sentences and a policy section. `GET /api/claims/CLM-1001/steps` shows each tool call and its result
+- [x] Live: after `uv run -m agent CLM-1003`, whatever the agent decided, there's no payment over $1,000.00 without a sign-off
+- [x] `npm run check:python` passes, with coverage at 80% or more
 
 ## Phase 4: The dashboard's frame and the queue
 

@@ -7,6 +7,7 @@ from typing import Any
 from backend import db
 
 DATA = Path(__file__).parent.parent / "data"
+INSTRUCTIONS = Path(__file__).parent / "instructions.md"
 
 
 def load(name: str) -> Any:
@@ -20,6 +21,11 @@ def seed() -> str:
     policies = load("policies.json")
     customers = load("customers.json")
     handlers = load("handlers.json")
+    instructions = (
+        INSTRUCTIONS.read_text(encoding="utf-8")
+        + "\n"
+        + (DATA / "policy_wording.md").read_text(encoding="utf-8")
+    )
     with db.connect() as connection:
         connection.executescript(db.SCHEMA)
         connection.executemany(
@@ -53,6 +59,9 @@ def seed() -> str:
         connection.execute(
             "INSERT INTO settings VALUES ('company', ?)",
             ((DATA / "company.json").read_text(encoding="utf-8"),),
+        )
+        connection.execute(
+            "INSERT INTO settings VALUES ('instructions', ?)", (instructions,)
         )
     return (
         f"Seeded {len(claims)} claims, {len(policies)} policies, "
