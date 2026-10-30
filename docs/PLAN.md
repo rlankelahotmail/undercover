@@ -165,14 +165,14 @@ API checks run against the dev backend at `http://127.0.0.1:8000` from `npm run 
 
 **Why last:** it's the first time the whole system runs together on the real queue, so it finds the problems the stubbed tests can't. On `openai/gpt-6-luna` .
 
-- [ ] After `uv run -m backend.seed`, with `npm run dev` running, `uv run -m agent` works all 25 claims and prints one line for each
-- [ ] Afterward, `GET /api/claims` shows every claim `decided` or `waiting_for_sign_off`, with none `waiting` or `in_progress`
-- [ ] Every approve has a payout above $0, every decline and refer $0, and every decision has a reason of two or three sentences and a policy section
-- [ ] No claim has a payment over $1,000.00 without a sign-off, and every approved claim of $1,000.00 or less is paid
-- [ ] Browser: while the queue runs, the page of the claim being worked shows its steps arriving without a reload. Screenshot taken
-- [ ] Browser: signing off a claim that's waiting for sign-off moves it to Decided and paid, on its page and in the queue
-- [ ] `docs/STATUS.md` says what's built and how to run it: `npm run dev`, `uv run -m agent`, `uv run -m backend.seed` and `npm run check`
-- [ ] `npm run check` passes: ruff, pyright, pytest with coverage at 80% or more, ESLint, Prettier, tsc, vitest with coverage at 80% or more, and Playwright
+- [x] After `uv run -m backend.seed`, with `npm run dev` running, `uv run -m agent` works all 25 claims and prints one line for each
+- [x] Afterward, `GET /api/claims` shows every claim `decided` or `waiting_for_sign_off`, with none `waiting` or `in_progress`
+- [x] Every approve has a payout above $0, every decline and refer $0, and every decision has a reason of two or three sentences and a policy section
+- [x] No claim has a payment over $1,000.00 without a sign-off, and every approved claim of $1,000.00 or less is paid
+- [x] Browser: while the queue runs, the page of the claim being worked shows its steps arriving without a reload. Screenshot taken
+- [x] Browser: signing off a claim that's waiting for sign-off moves it to Decided and paid, on its page and in the queue
+- [x] `docs/STATUS.md` says what's built and how to run it: `npm run dev`, `uv run -m agent`, `uv run -m backend.seed` and `npm run check`
+- [x] `npm run check` passes: ruff, pyright, pytest with coverage at 80% or more, ESLint, Prettier, tsc, vitest with coverage at 80% or more, and Playwright
 
 ## Not in this plan
 
